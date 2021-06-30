@@ -29,6 +29,9 @@ import { ExamplesEffects } from './examples.effects';
 import { UserComponent } from './simple-state-management/components/user.component';
 import { UserService } from './simple-state-management/user.service';
 import { ElementsComponent } from './elements/elements.component';
+import { BlogContainerComponent } from './blog/components/blog-container.component';
+import { BlogService } from './blog/blog.service';
+import { BlogEffects } from './blog/blog.effects';
 
 export function httpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(
@@ -54,6 +57,7 @@ export function httpLoaderFactory(http: HttpClient) {
       isolate: true
     }),
     EffectsModule.forFeature([
+      BlogEffects,
       ExamplesEffects,
       TodosEffects,
       StockMarketEffects,
@@ -63,6 +67,7 @@ export function httpLoaderFactory(http: HttpClient) {
   ],
   declarations: [
     ExamplesComponent,
+    BlogContainerComponent,
     TodosContainerComponent,
     StockMarketContainerComponent,
     ParentComponent,
@@ -74,7 +79,7 @@ export function httpLoaderFactory(http: HttpClient) {
     UserComponent,
     ElementsComponent
   ],
-  providers: [StockMarketService, UserService]
+  providers: [StockMarketService, UserService, BlogService]
 })
 export class ExamplesModule {
   constructor() {}

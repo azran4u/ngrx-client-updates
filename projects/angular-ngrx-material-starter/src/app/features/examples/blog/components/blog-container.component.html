@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <ng-container *ngIf="blogs$ | async as blogs">
+      <mat-card
+        *ngFor="let blog of blogs"
+        class="blog"
+        [ngClass]="routeAnimationsElements"
+      >
+        <span>id: {{ blog.id }} name: {{ blog.name }}</span>
+      </mat-card>
+    </ng-container>
+  </div>
+</div>

@@ -58,6 +58,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    debugger;
     this.storageService.testLocalStorage();
     if (AppComponent.isIEorEdgeOrSafari()) {
       this.store.dispatch(

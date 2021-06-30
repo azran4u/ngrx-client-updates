@@ -32,7 +32,12 @@
               "projects/angular-ngrx-material-starter/src/styles-app-loading.scss",
               "projects/angular-ngrx-material-starter/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "sourceMap": {
+              "scripts": true,
+              "styles": true,
+              "vendor": true
+            }
           },
           "configurations": {
             "production": {

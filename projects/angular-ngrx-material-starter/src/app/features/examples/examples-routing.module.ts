@@ -13,6 +13,7 @@ import { FormComponent } from './form/components/form.component';
 import { NotificationsComponent } from './notifications/components/notifications.component';
 import { UserComponent } from './simple-state-management/components/user.component';
 import { ElementsComponent } from './elements/elements.component';
+import { BlogContainerComponent } from './blog/components/blog-container.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,11 @@ const routes: Routes = [
         path: '',
         redirectTo: 'todos',
         pathMatch: 'full'
+      },
+      {
+        path: 'blog',
+        component: BlogContainerComponent,
+        data: { title: 'blog' }
       },
       {
         path: 'todos',
