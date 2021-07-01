@@ -1,13 +1,23 @@
 <div class="container">
   <div class="row">
+    <h1>blogs from store</h1>
     <ng-container *ngIf="blogs$ | async as blogs">
       <mat-card
         *ngFor="let blog of blogs"
         class="blog"
         [ngClass]="routeAnimationsElements"
       >
-        <span>id: {{ blog.id }} name: {{ blog.name }}</span>
+        <h2>id: {{ blog.id }} name: {{ blog.name }}</h2>
       </mat-card>
     </ng-container>
+    <h1>blogs from service</h1>
+    <ng-container *ngIf="blogsFromService$ | async as blogs">
+      <mat-card *ngFor="let blog of blogs" [ngClass]="routeAnimationsElements">
+        <h2>id: {{ blog.id }} name: {{ blog.name }}</h2>
+      </mat-card>
+    </ng-container>
+    <!-- <mat-card (click)="refreshDataFromService()">
+      <h2>refresh data from service</h2>
+    </mat-card> -->
   </div>
 </div>

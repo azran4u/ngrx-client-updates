@@ -13,16 +13,16 @@ export const initialState: BlogState = {
 
 const reducer = createReducer(
   initialState,
-  on(blogAction.actionBlogFetchSuccess, (state, { blogs }) => {
-    return produce(state, (draft) => {
+  on(blogAction.actionBlogFetchSuccess, (state, { blogs }) =>
+    produce(state, (draft) => {
       blogs.map((blog) => draft.blogs.set(blog.id, blog));
-    });
-  }),
-  on(blogAction.actionBlogRemoveById, (state, { ids }) => {
-    return produce(state, (draft) => {
+    })
+  ),
+  on(blogAction.actionBlogRemoveById, (state, { ids }) =>
+    produce(state, (draft) => {
       ids.map((id) => draft.blogs.delete(id));
-    });
-  })
+    })
+  )
 );
 
 export function blogReducer(state: BlogState | undefined, action: Action) {
