@@ -18,7 +18,7 @@ const reducer = createReducer(
       blogs.map((blog) => draft.blogs.set(blog.id, blog));
     })
   ),
-  on(blogAction.actionBlogRemoveById, (state, { ids }) =>
+  on(blogAction.actionBlogDeleted, (state, { ids }) =>
     produce(state, (draft) => {
       ids.map((id) => draft.blogs.delete(id));
     })

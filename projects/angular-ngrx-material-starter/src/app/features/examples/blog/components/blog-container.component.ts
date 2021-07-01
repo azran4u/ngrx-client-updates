@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import {
   ROUTE_ANIMATIONS_ELEMENTS,
@@ -10,9 +10,10 @@ import {
 } from '../../../../core/core.module';
 
 import * as blogActions from '../blog.actions';
-import { Blog } from '../blog.model';
+import { Blog, ID } from '../blog.model';
 import * as blogSelectors from '../blog.selectors';
 import { BlogService } from '../blog.service';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'anms-blog',
@@ -34,8 +35,38 @@ export class BlogContainerComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.store.dispatch(blogActions.actionBlogFetchAll());
+    this.store.dispatch(
+      blogActions.actionBlogSelected({ ids: ['blog1', 'blog2'] })
+    );
     this.blogs$ = this.store.pipe(select(blogSelectors.selectAllBlogs));
-    this.blogsFromService$ = this.blogService.getAllBlogs();
+    this.blogsFromService$ = this.blogService.getAllBlogsLiveQuery();
+  }
+
+  deleteBlogById(id: ID) {
+    this.blogService.updateBlogs([], [id]);
+  }
+
+  updateBlogById(id: ID) {
+    this.blogService
+      .getBlogsByIds([id])
+      .pipe(
+        map((blogs) => {
+          if (blogs.length != 1) {
+            console.error(`cannot find blog id ${id}`);
+          }
+          const blog = blogs[0];
+          if (!blog) return;
+          this.blogService.updateBlogs(
+            [
+              {
+                ...blog,
+                name: `${blog.name}-updated`
+              }
+            ],
+            []
+          );
+        })
+      )
+      .subscribe();
   }
 }

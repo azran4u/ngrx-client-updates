@@ -1,16 +1,14 @@
 import { createAction, props } from '@ngrx/store';
 import { Blog, ID } from './blog.model';
 
-export const actionBlogFetchAll = createAction('[Blog] Fetch All');
-
 export const actionBlogSelected = createAction(
   '[Blog] Selected',
-  props<{ id: ID }>()
+  props<{ ids: ID[] }>()
 );
 
-export const actionBlogFetchById = createAction(
-  '[Blog] Fetch By Id',
-  props<{ id: ID }>()
+export const actionBlogFetchByIds = createAction(
+  '[Blog] Fetch By Ids',
+  props<{ ids: ID[] }>()
 );
 
 export const actionBlogFetchSuccess = createAction(
@@ -23,9 +21,9 @@ export const actionBlogFetchFailure = createAction(
   props<{ error: Error }>()
 );
 
-export const actionBlogSubscribeById = createAction(
+export const actionBlogSubscribeByIds = createAction(
   '[Blog] Subscribe By Id',
-  props<{ id: ID }>()
+  props<{ ids: ID[] }>()
 );
 
 export const actionBlogSubscriptionFailure = createAction(
@@ -38,7 +36,7 @@ export const actionBlogUpdated = createAction(
   props<{ updated: ID[]; deleted: ID[] }>()
 );
 
-export const actionBlogRemoveById = createAction(
-  '[Blog] Remove',
+export const actionBlogDeleted = createAction(
+  '[Blog] Deleted',
   props<{ ids: ID[] }>()
 );

@@ -15,32 +15,37 @@ fdescribe('BlogService', () => {
   });
 
   it('should emit update asfter change', () => {
-    const updates$ = service
-      .subscribeToBlogChanges(['testblog1'])
+    service
+      .subscribeToBlogChanges(['testblog1', 'testblog3'])
       .subscribe(({ updated, deleted }) => {
-        expect(updated.includes('testblog1'));
+        expect(updated).toEqual(['testblog1']);
+        expect(deleted).toEqual(['testblog3']);
       }, fail);
     service.updateBlogs(
       [{ id: 'testblog1', name: 'testblog1', author: 'testuser1', posts: [] }],
-      []
+      ['testblog3']
     );
     expect(service).toBeTruthy();
   });
 
   it('should not emit irrelevant update', () => {
-    const updates$ = service
+    service
       .subscribeToBlogChanges(['testblog1', 'testblog3'])
       .subscribe(({ updated, deleted }) => {
-        expect(updated.includes('testblog1'));
+        expect(updated).toEqual(['testblog1']);
+        expect(deleted).toEqual(['testblog3']);
       }, fail);
+
+    // irrelevant update
     service.updateBlogs(
       [{ id: 'testblog2', name: 'testblog1', author: 'testuser1', posts: [] }],
       []
     );
+
+    // relevant update
     service.updateBlogs(
       [{ id: 'testblog1', name: 'testblog1', author: 'testuser1', posts: [] }],
-      []
+      ['testblog3']
     );
-    service.updateBlogs([], ['testblog3']);
   });
 });

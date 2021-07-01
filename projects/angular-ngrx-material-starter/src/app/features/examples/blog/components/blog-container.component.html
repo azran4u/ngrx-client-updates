@@ -14,10 +14,23 @@
     <ng-container *ngIf="blogsFromService$ | async as blogs">
       <mat-card *ngFor="let blog of blogs" [ngClass]="routeAnimationsElements">
         <h2>id: {{ blog.id }} name: {{ blog.name }}</h2>
+        <button
+          type="button"
+          mat-raised-button
+          color="accent"
+          (click)="deleteBlogById(blog.id)"
+        >
+          delete
+        </button>
+        <button
+          type="button"
+          mat-raised-button
+          color="accent"
+          (click)="updateBlogById(blog.id)"
+        >
+          update
+        </button>
       </mat-card>
     </ng-container>
-    <!-- <mat-card (click)="refreshDataFromService()">
-      <h2>refresh data from service</h2>
-    </mat-card> -->
   </div>
 </div>
